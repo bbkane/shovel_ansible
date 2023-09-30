@@ -1,0 +1,2 @@
+# generate with: limactl show-ssh default -f config > ./ssh.cfg
+ssh.cfg
