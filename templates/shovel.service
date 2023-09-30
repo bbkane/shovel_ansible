@@ -1,0 +1,11 @@
+[Unit]
+Description=Shovel DNS query frontend
+After=syslog.target network-online.target remote-fs.target nss-lookup.target
+
+[Service]
+Type=simple
+ExecStart={{ shovel_dir }}/shovel serve --config {{ shovel_dir }}/shovel.yaml
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

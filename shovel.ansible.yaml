@@ -1,0 +1,47 @@
+- name: Install shovel
+  hosts: hosts
+  vars:
+    shovel_dir: /etc/bbkane/shovel/v0.0.10
+  tasks:
+    - name: Create shovel directory
+      become: true
+      ansible.builtin.file:
+        path: "{{ shovel_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Copy config
+      become: true
+      ansible.builtin.copy:
+        src: ./files/shovel.yaml
+        dest: "{{ shovel_dir }}/shovel.yaml"
+        owner: root
+        group: root
+        mode: '0600'
+
+    - name: Install binary
+      become: true
+      ansible.builtin.unarchive:
+        src: ~/Downloads/shovel_0.0.10_linux_amd64.tar.gz
+        dest: "{{ shovel_dir }}"
+
+    - name: Copy unit file template
+      become: true
+      ansible.builtin.template:
+        src: ./templates/shovel.service
+        dest: "{{ shovel_dir }}/shovel.service"
+        owner: root
+        group: root
+        mode: '0600'
+
+    - name: Enable service
+      become: true
+      ansible.builtin.systemd_service:
+        enabled: true
+        name: "{{ shovel_dir }}/shovel.service"
+
+
+    - name: Start service # noqa command-instead-of-module no-changed-when
+      become: true
+      ansible.builtin.shell:
+        cmd: systemctl is-active --quiet shovel || systemctl start shovel
