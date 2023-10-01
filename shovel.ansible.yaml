@@ -10,6 +10,12 @@
         state: directory
         mode: '0755'
 
+    - name: Install binary
+      become: true
+      ansible.builtin.unarchive:
+        src: ~/Downloads/shovel_0.0.10_linux_amd64.tar.gz
+        dest: "{{ shovel_dir }}"
+
     - name: Copy config
       become: true
       ansible.builtin.copy:
@@ -18,12 +24,6 @@
         owner: root
         group: root
         mode: '0600'
-
-    - name: Install binary
-      become: true
-      ansible.builtin.unarchive:
-        src: ~/Downloads/shovel_0.0.10_linux_amd64.tar.gz
-        dest: "{{ shovel_dir }}"
 
     - name: Copy unit file template
       become: true
@@ -40,3 +40,46 @@
         enabled: true
         state: started
         name: shovel.service
+
+- name: Install OpenObserve
+  hosts: hosts
+  vars:
+    openobserve_dir: /etc/bbkane/openobserve/v0.6.2
+  tasks:
+    - name: Create OpenObserve directory
+      become: true
+      ansible.builtin.file:
+        path: "{{ openobserve_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Install binary
+      become: true
+      ansible.builtin.unarchive:
+        src: ~/Downloads/openobserve-v0.6.2-linux-amd64.tar.gz
+        dest: "{{ openobserve_dir }}"
+
+    - name: Copy env file template
+      become: true
+      ansible.builtin.template:
+        src: ./templates/openobserve.env
+        dest: "{{ openobserve_dir }}/openobserve.env"
+        owner: root
+        group: root
+        mode: '0600'
+
+    - name: Copy unit file template
+      become: true
+      ansible.builtin.template:
+        src: ./templates/openobserve.service
+        dest: "/etc/systemd/system/openobserve.service"
+        owner: root
+        group: root
+        mode: '0600'
+
+    - name: Enable service
+      become: true
+      ansible.builtin.systemd_service:
+        enabled: true
+        state: started
+        name: openobserve.service
