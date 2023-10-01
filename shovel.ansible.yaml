@@ -29,7 +29,7 @@
       become: true
       ansible.builtin.template:
         src: ./templates/shovel.service
-        dest: "{{ shovel_dir }}/shovel.service"
+        dest: "/etc/systemd/system/shovel.service"
         owner: root
         group: root
         mode: '0600'
@@ -38,10 +38,5 @@
       become: true
       ansible.builtin.systemd_service:
         enabled: true
-        name: "{{ shovel_dir }}/shovel.service"
-
-
-    - name: Start service # noqa command-instead-of-module no-changed-when
-      become: true
-      ansible.builtin.shell:
-        cmd: systemctl is-active --quiet shovel || systemctl start shovel
+        state: started
+        name: shovel.service
