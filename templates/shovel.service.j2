@@ -5,6 +5,7 @@ After=syslog.target network-online.target remote-fs.target nss-lookup.target
 [Service]
 Type=simple
 ExecStart={{ shovel_dir }}/shovel serve --config {{ shovel_dir }}/shovel.yaml
+EnvironmentFile={{ shovel_dir }}/shovel.env
 Restart=on-failure
 
 [Install]

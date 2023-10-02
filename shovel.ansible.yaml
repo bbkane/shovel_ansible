@@ -2,6 +2,9 @@
   hosts: all
   vars:
     shovel_dir: /etc/bbkane/shovel/v0.0.10
+    local_shovel_archive: ~/Downloads/shovel_0.0.10_linux_amd64.tar.gz
+    shovel_config_file: ./files/shovel.yaml
+
   tasks:
     - name: Create shovel directory
       become: true
@@ -13,19 +16,28 @@
     - name: Install binary
       become: true
       ansible.builtin.unarchive:
-        src: ~/Downloads/shovel_0.0.10_linux_amd64.tar.gz
+        src: "{{ local_shovel_archive }}"
         dest: "{{ shovel_dir }}"
 
-    - name: Copy config template
+    - name: Copy config file
       become: true
       notify: Restart service
-      ansible.builtin.template:
-        src: ./templates/shovel.yaml.j2
+      ansible.builtin.copy:
+        src: "{{ shovel_config_file }}"
         dest: "{{ shovel_dir }}/shovel.yaml"
         owner: root
         group: root
         mode: '0600'
 
+    - name: Copy env file template
+      become: true
+      notify: Restart service
+      ansible.builtin.template:
+        src: ./templates/shovel.env.j2
+        dest: "{{ shovel_dir }}/shovel.env"
+        owner: root
+        group: root
+        mode: '0600'
 
     - name: Copy unit file template
       notify: Restart service
