@@ -1,7 +1,7 @@
 [Unit]
 Description=The OpenObserve server
 After=syslog.target network-online.target remote-fs.target nss-lookup.target
-Wants=network-online.target
+
 
 [Service]
 Type=simple
@@ -10,6 +10,15 @@ EnvironmentFile={{ openobserve_dir }}/openobserve.env
 ExecStart={{ openobserve_dir }}/openobserve
 ExecStop=/bin/kill -s QUIT $MAINPID
 Restart=on-failure
+
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=full
+ProtectHome=true
+ReadOnlyPaths=/
+ReadWritePaths={{ openobserve_dir }}
+NoNewPrivileges=true
+MountFlags=slave
 
 [Install]
 WantedBy=multi-user.target
