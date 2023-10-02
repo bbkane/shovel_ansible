@@ -20,7 +20,7 @@
       become: true
       notify: Restart service
       ansible.builtin.template:
-        src: ./templates/shovel.yaml
+        src: ./templates/shovel.yaml.j2
         dest: "{{ shovel_dir }}/shovel.yaml"
         owner: root
         group: root
@@ -31,7 +31,7 @@
       notify: Restart service
       become: true
       ansible.builtin.template:
-        src: ./templates/shovel.service
+        src: ./templates/shovel.service.j2
         dest: "/etc/systemd/system/shovel.service"
         owner: root
         group: root

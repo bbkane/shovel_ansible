@@ -20,7 +20,7 @@
       become: true
       notify: Restart service
       ansible.builtin.template:
-        src: ./templates/openobserve.env
+        src: ./templates/openobserve.env.j2
         dest: "{{ openobserve_dir }}/openobserve.env"
         owner: root
         group: root
@@ -30,7 +30,7 @@
       become: true
       notify: Restart service
       ansible.builtin.template:
-        src: ./templates/openobserve.service
+        src: ./templates/openobserve.service.j2
         dest: "/etc/systemd/system/openobserve.service"
         owner: root
         group: root
