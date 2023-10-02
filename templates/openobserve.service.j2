@@ -11,12 +11,14 @@ ExecStart={{ openobserve_dir }}/openobserve
 ExecStop=/bin/kill -s QUIT $MAINPID
 Restart=on-failure
 
+DynamicUser=true
 PrivateTmp=true
 PrivateDevices=true
 ProtectSystem=full
 ProtectHome=true
-ReadOnlyPaths=/
-ReadWritePaths={{ openobserve_dir }}
+StateDirectory=openobserve
+CacheDirectory=openobserve
+WorkingDirectory={{ openobserve_dir }}
 NoNewPrivileges=true
 MountFlags=slave
 
