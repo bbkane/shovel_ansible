@@ -29,6 +29,16 @@ ProtectHostname=true
 ProtectKernelTunables=true
 RestrictRealtime=true
 ProtectProc=invisible
+ProtectKernelLogs=true
+RestrictNamespaces=true
+CapabilityBoundingSet=~CAP_SETUID CAP_SETGID CAP_SETPCAP
+CapabilityBoundingSet=~CAP_CHOWN CAP_FSETID CAP_SETFCAP
+CapabilityBoundingSet=~CAP_SYS_PTRACE
+CapabilityBoundingSet=~CAP_NET_ADMIN
+CapabilityBoundingSet=~CAP_SYS_ADMIN
+PrivateUsers=true
+RestrictAddressFamilies=~AF_UNIX
+SystemCallArchitectures=native
 
 [Install]
 WantedBy=multi-user.target
