@@ -1,0 +1,11 @@
+serve:
+  addr-port: 0.0.0.0:8080
+  http-origin: http://127.0.0.1:8080
+  otel:
+    provider: open-observe
+    service-env: dev
+    service-version: 0.10.0
+    service-name: shovel serve
+  open-observe:
+    user: "{{ lookup('ansible.builtin.env', 'SHOVEL_SERVE_OPENOBSERVE_USER', default=Undefined) }}"
+    pass: "{{ lookup('ansible.builtin.env', 'SHOVEL_SERVE_OPENOBSERVE_PASS', default=Undefined) }}"
