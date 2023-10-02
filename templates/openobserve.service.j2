@@ -22,5 +22,13 @@ WorkingDirectory={{ openobserve_dir }}
 NoNewPrivileges=true
 MountFlags=slave
 
+ProtectClock=true
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectHostname=true
+ProtectKernelTunables=true
+RestrictRealtime=true
+ProtectProc=invisible
+
 [Install]
 WantedBy=multi-user.target
