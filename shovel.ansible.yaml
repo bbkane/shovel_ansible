@@ -1,10 +1,5 @@
 - name: Install shovel
   hosts: all
-  vars:
-    shovel_dir: /etc/bbkane/shovel/v0.0.10
-    local_shovel_archive: ~/Downloads/shovel_0.0.10_linux_amd64.tar.gz
-    shovel_config_file: ./files/shovel.yaml
-
   tasks:
     - name: Create shovel directory
       become: true
@@ -15,8 +10,9 @@
 
     - name: Install binary
       become: true
+      notify: Restart service
       ansible.builtin.unarchive:
-        src: "{{ local_shovel_archive }}"
+        src: "{{ shovel_local_archive }}"
         dest: "{{ shovel_dir }}"
 
     - name: Copy config file

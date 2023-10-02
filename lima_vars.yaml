@@ -1,0 +1,6 @@
+openobserve_dir: /etc/bbkane/openobserve/v0.6.2
+openobserve_local_archive: ~/Downloads/openobserve-v0.6.2-linux-amd64.tar.gz
+
+shovel_config_file: ./files/shovel.yaml
+shovel_dir: /etc/bbkane/shovel/v0.0.10
+shovel_local_archive: ~/Downloads/shovel_0.0.10_linux_amd64.tar.gz

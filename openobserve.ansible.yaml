@@ -1,7 +1,5 @@
 - name: Install OpenObserve
   hosts: all
-  vars:
-    openobserve_dir: /etc/bbkane/openobserve/v0.6.2
   tasks:
     - name: Create OpenObserve directory
       become: true
@@ -12,8 +10,9 @@
 
     - name: Install binary
       become: true
+      notify: Restart service
       ansible.builtin.unarchive:
-        src: ~/Downloads/openobserve-v0.6.2-linux-amd64.tar.gz
+        src: "{{ openobserve_local_archive }}"
         dest: "{{ openobserve_dir }}"
 
     - name: Copy env file template
