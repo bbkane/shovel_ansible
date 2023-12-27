@@ -1,8 +1,6 @@
 serve:
   addr-port: 0.0.0.0:8080
-  http-origin: http://127.0.0.1:8080
+  http-origin: "request.Host"
   otel:
-    provider: open-observe
+    provider: openobserve
     service-env: dev
-    service-version: 0.10.0
-    service-name: shovel serve
