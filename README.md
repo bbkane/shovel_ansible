@@ -1,6 +1,6 @@
 # shovel_ansible
 
- Install shovel + OpenObserve as systemd services, on a local dev VM or production VM.
+ Install [shovel](https://github.com/bbkane/shovel) + [OpenObserve](https://openobserve.ai/) as systemd services, on a local dev VM or production VM.
 
 # Local Dev VM install
 
