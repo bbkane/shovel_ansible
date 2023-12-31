@@ -52,6 +52,10 @@ Open OpenObserve at: http://localhost:5080/web/traces?period=15m&query=&org_iden
 
 Open shovel at: http://127.0.0.1:8080/?count=1&nameservers=dns3.p09.nsone.net%3A53&protocol=udp&qnames=linkedin.com+www.linkedin.com&rtypes=A&subnetMap=&subnets=
 
+## Import dashboards
+
+There isn't an API for this yet, so export by using the download icon when viewing a dashboard and import from the main menu.
+
 # Production VM
 
 Obtain releases and export envvars as above.
