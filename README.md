@@ -62,8 +62,14 @@ Obtain releases and export envvars as above.
 
 Create `prod_vars.yaml`. Use `./lima_vars.yaml` for reference
 
+NOTE: ensure the `-i` flag for a single host ends with a comma (`,`)
+
 ```bash
-ansible-playbook -i 'host,' --extra-vars "@prod_vars.yaml" openobserve.ansible.yaml shovel.ansible.yaml
+ansible-playbook \
+    --ask-become-pass \
+    -i '<host>,' \
+    --extra-vars "@prod_vars.yaml" \
+    openobserve.ansible.yaml shovel.ansible.yaml
 ```
 
 # Debugging
