@@ -80,4 +80,7 @@ sudo systemctl status shovel
 
 # Check logs
 sudo journalctl -u shovel
+
+# Analyze security to tighten systemd capabilities
+sudo systemd-analyze security /etc/systemd/system/openobserve.service
 ```
