@@ -1,0 +1,21 @@
+- name: Configure iptables
+  hosts: all
+  tasks:
+    - name: Copy ipv4save file
+      become: true
+      notify: Restart service
+      ansible.builtin.copy:
+        src: "{{ iptables_ipv4save_file }}"
+        dest: "/etc/systemd/scripts/ip4save"
+        owner: root
+        group: root
+        mode: '0644'
+
+  handlers:
+    - name: Restart service
+      become: true
+      ansible.builtin.systemd_service:
+        enabled: true
+        state: restarted
+        daemon_reload: true
+        name: iptables
