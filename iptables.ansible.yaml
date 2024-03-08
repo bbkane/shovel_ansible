@@ -5,7 +5,7 @@
       become: true
       notify: Restart service
       ansible.builtin.copy:
-        src: "{{ iptables_ipv4save_file }}"
+        src: "{{ iptables_ip4save_file }}"
         dest: "/etc/systemd/scripts/ip4save"
         owner: root
         group: root
