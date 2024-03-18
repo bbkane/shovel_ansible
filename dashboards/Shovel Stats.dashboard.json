@@ -1,0 +1,159 @@
+{
+  "version": 3,
+  "dashboardId": "7115747007276384256Gg2ALk",
+  "title": "Shovel Stats",
+  "description": "",
+  "role": "",
+  "owner": "",
+  "created": "2023-10-05T17:18:10.575Z",
+  "tabs": [
+    {
+      "tabId": "default",
+      "name": "Default",
+      "panels": [
+        {
+          "id": "Panel_ID7249710",
+          "type": "bar",
+          "title": "/submit count",
+          "description": "",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "base_map": null,
+            "map_view": null
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) as \"x_axis_1\", count(http_route) as \"y_axis_1\"  FROM \"default\" WHERE http_route IN ('/submit') GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "customQuery": false,
+              "fields": {
+                "stream": "default",
+                "stream_type": "traces",
+                "x": [
+                  {
+                    "label": "Timestamp",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram"
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Http Route",
+                    "alias": "y_axis_1",
+                    "column": "http_route",
+                    "color": "#5960b2",
+                    "aggregationFunction": "count"
+                  }
+                ],
+                "z": [],
+                "filter": [
+                  {
+                    "type": "list",
+                    "values": [
+                      "/submit"
+                    ],
+                    "column": "http_route",
+                    "operator": null,
+                    "value": null
+                  }
+                ]
+              },
+              "config": {
+                "promql_legend": ""
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 24,
+            "h": 12,
+            "i": 1
+          }
+        },
+        {
+          "id": "Panel_ID1276010",
+          "type": "table",
+          "title": "Client IPs",
+          "description": "",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "decimals": 2,
+            "axis_border_show": false,
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": []
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT net_sock_peer_addr as \"x_axis_2\", count(net_sock_peer_addr) as \"y_axis_1\"  FROM \"default\"  GROUP BY x_axis_2",
+              "customQuery": false,
+              "fields": {
+                "stream": "default",
+                "stream_type": "traces",
+                "x": [
+                  {
+                    "label": "Net Sock Peer Addr",
+                    "alias": "x_axis_2",
+                    "column": "net_sock_peer_addr",
+                    "color": null
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Count",
+                    "alias": "y_axis_1",
+                    "column": "net_sock_peer_addr",
+                    "color": "#5960b2",
+                    "aggregationFunction": "count"
+                  }
+                ],
+                "z": [],
+                "filter": []
+              },
+              "config": {
+                "promql_legend": "",
+                "layer_type": "scatter",
+                "weight_fixed": 1,
+                "limit": 0,
+                "min": 0,
+                "max": 100
+              }
+            }
+          ],
+          "layout": {
+            "x": 24,
+            "y": 0,
+            "w": 24,
+            "h": 12,
+            "i": 2
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        }
+      ]
+    }
+  ]
+}
